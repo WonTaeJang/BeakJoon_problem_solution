@@ -44,7 +44,7 @@ else:
         test_div5 = test - (SUGAR_5*(x))
         test_div3 = division_Func(test_div5, SUGAR_3)
 
-        print(test, (x+1),test_div5, test_div3)
+        #print(test, (x+1),test_div5, test_div3)
 
         if test_div3[1] == 0:
             result = (x) + test_div3[0]

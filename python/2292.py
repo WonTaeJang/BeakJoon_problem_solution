@@ -26,20 +26,4 @@ def getFloor(num):
 
     return floor
 
-def floorCount(floor):
-    count = 1
-
-    if floor == 1:
-        return count
-    else:
-        for x in range(floor):
-            count += 6*x
-            print (count)
-        
-    return count
-
-
 print(getFloor(int(N)))
-
-#floorCount(int(N))
-    

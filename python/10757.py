@@ -7,6 +7,8 @@ https://www.acmicpc.net/problem/10757
 입력
 > 첫째 줄에 A와 B가 주어진다. (0 < A,B < 1010000)
 
+풀이
+> https://ahracho.github.io/posts/python/2017-05-09-python-integer-overflow/
 
 '''
 
