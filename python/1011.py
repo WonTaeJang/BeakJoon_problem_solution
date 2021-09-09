@@ -27,57 +27,62 @@
 '''
 
 '''
-0 15
-0 -> 1 -> 2 -> 4 -> 7 -> 14 -> 15
-
-20 23 (0 3)
-0 -> 1 -> 2 -> 3
-
-1 5 (0 4)
-0 -> 1 -> 3 -> 4
-
-45 50 (0 5)
-0 -> 1 -> 2 -> 4 -> 5
-
-0 6
-0 -> 1 -> 3 -> 5 -> 6
+1       1               1
+2       1 1             2
+3       1 1 1           3
+4       1 2 1           3
+5       1 2 1 1         4
+6       1 2 2 1         4
+7       1 2 2 1 1       5
+8       1 2 2 2 1       5
+9       1 2 3 2 1       5
+10      1 2 3 2 1 1     6
+11      1 2 3 2 2 1     6
+12      1 2 3 3 2 1     6
+13      1 2 3 3 2 1 1   7
 
 '''
 
-loop = int(input())
+num = int(input())
+
 result = []
 
+def calc_func(x):
+   cnt = 2
+   add = 0
+   while x > cnt**2:
+      cnt += 1
 
-def min_depth(x, y):
-    start_x = 0
-    end_y = y-x
+   if not isIncrease(x, cnt):
+       add = -1
 
-    z = recursion_calc(start_x, end_y)
+   return 2*(cnt-1)+1 + add
 
-    return z
+def isIncrease(x, cnt):
+    tempA = (cnt-1)**2
+    tempB = cnt**2
+    tempC = (tempB - tempA - 1)/2
 
-def recursion_calc(x, y, cnt = 0):
-    rx = [x+1, x, x-1]
-    z = cnt
-
-    if y - x == 1:
-        return z+1
-    elif x >= y:
-        return -1
-    elif x < y:
-        for i in range(3):
-            k = recursion_calc(x + rx[i], y, z + 1)
-            if k != -1:
-                z = k
-                break
-    
-    return z
+    if x <= tempA + tempC:
+        return False
+    else: 
+        return True
 
 
-for i in range(loop):
-    x,y = map(int, input().split())
-    result.append(min_depth(x, y))
+for x in range(num):
+   A, B = map(int, input().split())
+   z = B - A
 
-# result
+   if z == 1:
+      result.append(1)
+   elif z == 2: 
+      result.append(2)
+   elif z <= 4:
+      result.append(3) 
+   else:
+      result.append(calc_func(z))
+
+   
+
 for x in range(len(result)):
-    print(result[x])
+   print(result[x])
