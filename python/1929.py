@@ -11,31 +11,28 @@
 
 https://wikidocs.net/21638
 '''
-import sys
-def isPrimeNumber(x):
-    result = True
-    value = x-1
+# 에라토스테네스의 체
+# 방식: 범위에서 합성수를 지우는 방식으로 소수를 찾는 방법.
+# 장점: 범위의 모든 소수를 구할 때 효율적
 
-    if(x == 1):
-        return False
+def getPrimes(min, max):
+    n = max
 
-    while value > 1:
-        if x%value == 0:
-            result = False
-            break
+    a = [False,False] + [True]*(n-1)
+    primes=[]
 
-        value -= 1
+    for i in range(2,n+1):
+        if a[i]:
+            primes.append(i)
+            for j in range(2*i, n+1, i):
+                a[j] = False
 
-    return result
+    return primes
 
-min, max = map(int, input().split())
+min, max = map(int,input().split())
 
-result = []
+arr = getPrimes(min, max)
 
-for x in range(min, max+1):
-    if isPrimeNumber(x):
-        result.append(x)
-
-#result
-for x in result:
-    sys.stdout.write(str(x)+"\n")
+for x in arr:
+    if(x >= min):
+        print(x)
