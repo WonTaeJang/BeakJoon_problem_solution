@@ -41,10 +41,6 @@ def getPrimes(num):
         cnt = (int)(len(result)/2)
         print(result[cnt-1],result[cnt])
 
-    #print(result)
-
-    #return primes
-
 cnt = int(input())
 
 for x in range(cnt):
