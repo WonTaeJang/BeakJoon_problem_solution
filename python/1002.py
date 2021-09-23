@@ -17,3 +17,25 @@
 > 각 테스트 케이스마다 류재명이 있을 수 있는 위치의 수를 출력한다.
  만약 류재명이 있을 수 있는 위치의 개수가 무한대일 경우에는 -1을 출력한다.
 '''
+import math
+
+num = int(input())
+result = []
+
+for i in range(num):
+    x1, y1, r1, x2, y2, r2 = map(int, input().split())
+    distance = math.sqrt(float(math.fabs(x2-x1)**2 + math.fabs(y2-y1)**2)) 
+
+    if(distance == 0 and r1 == r2):
+        result.append('-1')
+    elif(r1+r2 < distance or distance + r1 < r2 or distance + r2 < r1):
+        result.append('0')
+    elif(distance + r1 == r2 or distance + r2 == r1 or distance == r1 + r2):
+        result.append('1')
+    elif(distance < r1 + r2):
+        result.append('2')
+
+    #print(distance)
+
+for i in result:
+    print(i)
