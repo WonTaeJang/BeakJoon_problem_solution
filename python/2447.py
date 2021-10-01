@@ -16,8 +16,48 @@ N이 3보다 클 경우, 크기 N의 패턴은 공백으로 채워진 가운데�
 > 첫째 줄부터 N번째 줄까지 별을 출력한다.
 '''
 
+'''
+1. 2차원 배열을 만든다
+2. 입력받은 값의 3 제곱근을 구해서 몇번 반복해야하는지 확인한다. 
+3. 중간의 네모 사이즈는 3^3 이면 3^2 크기이다.
+
+3 3x3 1
+9 9x9 3x3
+27 3^2 
+(9,9) (9 + 8, 9)
+(9,9 + 8)(9 + 8,9 + 8)) 
+
+
+'''
+
 num = int(input())
+sprt3 = int(num**(1/3))
+star_table = [['*' for col in range(num)] for row in range(num)]
 
-result = [["*"]*num]*num
+def getSquareStar(sprt3, star_table):
+    count = sprt3
+    tb = star_table
 
-print(result)
+    square_point = 3**(count-1)
+    
+    for i in range(square_point):
+        for j in  range(square_point):
+            tb[square_point + i][square_point + j] = ' '
+
+    count -= 1
+
+    if count == 0:
+        return tb
+    else : 
+        return getSquareStar(count, tb)
+
+result = getSquareStar(sprt3, star_table)
+
+str = ''
+for i in range(num):
+    for j in  range(num):
+        str += result[i][j]
+
+    str += '\n' 
+
+print(str)  
