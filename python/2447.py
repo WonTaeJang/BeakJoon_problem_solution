@@ -29,35 +29,62 @@ N이 3보다 클 경우, 크기 N의 패턴은 공백으로 채워진 가운데�
 
 
 '''
+import math
+
+def star(n):
+    if n == 3:
+        star_list = ['***', '* *', '***']
+        return star_list
+    else:
+        new_star_list = [x * 3 for x in star(n//3)] 
+        new_star_list += [x + ' '*(n//3) + x for x in star(n//3)] 
+        new_star_list += [x * 3 for x in star(n//3)]
+        return new_star_list
+
+for i in star(int(input())):
+    print(i)
+
+
+
+
 
 num = int(input())
-sprt3 = int(num**(1/3))
+count = int(math.log(num * num, 9))
+
 star_table = [['*' for col in range(num)] for row in range(num)]
 
-def getSquareStar(sprt3, star_table):
-    count = sprt3
+def getSquareStar(count, star_table, sq_count):
+    incount = count
     tb = star_table
+    square_count = int(9**sq_count)
+    square_size = int(3**(count - 1))
 
-    square_point = 3**(count-1)
+    for a in range(int(square_count**(1/2))):
+        for b in range(int(square_count**(1/2))):
+            for i in range(square_size):
+                for j in range(square_size):
+                    a1 = int(3**incount)*a + square_size
+                    b1 = int(3**incount)*b + square_size
+                    tb[a1 + i][b1 + j] = ' '
+
     
-    for i in range(square_point):
-        for j in  range(square_point):
-            tb[square_point + i][square_point + j] = ' '
-
-    count -= 1
+    incount = incount - 1
 
     if count == 0:
         return tb
     else : 
-        return getSquareStar(count, tb)
+        return getSquareStar(incount, tb, sq_count + 1)
 
-result = getSquareStar(sprt3, star_table)
+result = getSquareStar(count, star_table, 0)
+
 
 str = ''
 for i in range(num):
     for j in  range(num):
         str += result[i][j]
 
-    str += '\n' 
+    if i != (num -1):
+        str += '\n' 
 
 print(str)  
+
